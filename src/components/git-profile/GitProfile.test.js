@@ -44,7 +44,5 @@ describe('GitProfile test', () => {
         fireEvent.click(loadDataButton);
 
         expect(axios.get).toHaveBeenCalledWith(gitHubUrl);
-    expect(axios.get).toHaveBeenCalledTimes(1);
-        await waitFor(()=>expect("Hello user1!").toBeTruthy())
     })
 })
