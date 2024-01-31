@@ -1,5 +1,6 @@
-const { render } = require("@testing-library/react")
-const { default: Counter } = require("./counter")
+import Counter from "./counter"
+import { render, screen } from "@testing-library/react"
+import React from "react"
 
 describe('Counter rendering', () => { 
   it("should render counter test", () => {
@@ -11,6 +12,6 @@ describe('Counter rendering', () => {
   test("should render initial value 0", () => {
     render(<Counter />)
     
-    expect(screen.getByRole('heading')).toHaveTextContent(0);
+    expect(screen.getAllByRole('heading')[1].textContent).toBe("0");
   })
  })
