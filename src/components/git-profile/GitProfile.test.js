@@ -5,9 +5,7 @@ import { when } from 'jest-when'
 import React from "react";
 // import '@testing-library/jest-dom'
 
-jest.mock("axios", () => {
-    return { get: jest.fn() };
-  });
+jest.mock("axios");
 
 
 describe('GitProfile test', () => {
