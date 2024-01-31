@@ -1,7 +1,5 @@
-import Image from "next/image";
+import Counter from "../components/counter/counter";
 import styles from "./page.module.css";
-import React from "react";
-import Counter from "@/components/counter/counter";
 export default function Home() {
   return (
     <main className={styles.main}>

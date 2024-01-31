@@ -8,6 +8,7 @@ export default function GitProfile({ url }) {
 
     function handleLoadDataButtonClick() {
         setIsLoading(true)
+        console.log("in here")
         axios.get(url).then((result) => {
             setData(result.data.login);
             setIsLoading(false);

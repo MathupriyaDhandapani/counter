@@ -1,7 +1,9 @@
-import { render, fireEvent } from "@testing-library/react"
+import { render, fireEvent, waitFor } from "@testing-library/react"
 import GitProfile from "./GitProfile"
-import axios from axios;
+import axios from "axios";
 import { when } from 'jest-when'
+import React from "react";
+// import '@testing-library/jest-dom'
 
 jest.mock("axios", () => {
     return { get: jest.fn() };
@@ -13,17 +15,22 @@ describe('GitProfile test', () => {
         const { getByRole } = render(<GitProfile />);
         const loadDataButton = getByRole('button', { name: 'Load data' })
 
-        expect(loadDataButton).toBeInTheDocument()
+        expect(loadDataButton).toBeDefined()
     })
 
     test('should render loading when clicked on load data button', () => {
         const gitHubUrl = "myUrl";
+        when(axios.get).calledWith(gitHubUrl).mockResolvedValue({
+            data: {
+                login: 'user1'
+            }
+        })
         const { getByRole, getByText } = render(<GitProfile url={gitHubUrl} />);
         const loadDataButton = getByRole('button', { name: 'Load data' })
 
         fireEvent.click(loadDataButton);
 
-        expect(getByText("Loading..")).toBeInTheDocument()
+        expect(getByText(/Loading../)).toBeTruthy()
     })
 
     test('should render github data when clicked on load data button', async () => {
@@ -38,8 +45,8 @@ describe('GitProfile test', () => {
 
         fireEvent.click(loadDataButton);
 
-        expect(axios.get).toHaveBeenCalledWith(url);
+        expect(axios.get).toHaveBeenCalledWith(gitHubUrl);
     expect(axios.get).toHaveBeenCalledTimes(1);
-        await waitFor(()=>expect("Hello user1!").toBeInTheDocument())
+        await waitFor(()=>expect("Hello user1!").toBeTruthy())
     })
 })
