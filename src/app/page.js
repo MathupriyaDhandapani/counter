@@ -1,19 +1,20 @@
 import Counter from "../components/counter/counter";
 import styles from "./page.module.css";
+import React from "react";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
+      <div className="page">
         <Counter/>
       </div>
 
-      <div className={styles.center}>
+      {/* <div className={styles.center}>
         
       </div>
 
       <div className={styles.grid}>
       
-      </div>
+      </div> */}
     </main>
   );
 }
